@@ -44,7 +44,7 @@ Your database should be designed to store customer, product, category, and order
   - SQL containing the seed data to populate your database tables
 - database/queries.sql:
   - SQL containing queries to extract the following data from your database tables:
-  1. Retrieve the first name, last name, and email address of all customers that have a Gmail email address.
-  2. Retrieve the address of the customers and the order ID for all orders that were placed in 2020
-  3. Retrieve all product details for products that are under the "Kitchen" category
-  4. Retrieve the product names and prices of all products ordered by customer with ID 2
+    1. Retrieve the first name, last name, and email address of all customers that have a Gmail email address.
+    2. Retrieve the address of the customers and the order ID for all orders that were placed in 2020
+    3. Retrieve all product details for products that are under the "Kitchen" category
+    4. Retrieve the product names and prices of all products ordered by customer with ID 2
