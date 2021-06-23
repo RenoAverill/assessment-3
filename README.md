@@ -52,6 +52,7 @@ Your e-commerce website should be structured using HTML, designed using CSS/Boot
 - **Category pages**
   - There should be a separate page for each of the various product categories (e.g. "Home", "Kitchen", "Bed & Bath", "Home Office", etc...)
   - These pages should show various (at least 4 per category) products with images, names, and prices. 
+    - NOTE: You can hard code these products for each page. You do not need to make it dynamic (i.e. do not need to use JavaScript to present product information) 
   - These pages should allow users to add products to their virtual shopping cart
 - **Shopping Cart page**
   - This page should show all of the items that were added to the user's shopping cart
