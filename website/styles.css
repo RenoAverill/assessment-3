@@ -115,5 +115,16 @@
 }
 
 .checkout-heading{
-	margin: 125px 125px;
+	display: block;
+	text-align: center;
+}
+
+#items{
+	display: block;
+	text-align: center;
+}
+
+.purchase{
+	display: block;
+	text-align: center;
 }

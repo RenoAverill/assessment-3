@@ -1,93 +1,84 @@
 -- Schema creation goes here
-DROP TABLE IF EXISTS kitchens CASCADE;
-DROP TABLE IF EXISTS pool_tables CASCADE;
-DROP TABLE IF EXISTS pool_cues CASCADE;
 DROP TABLE IF EXISTS adressess CASCADE;
 DROP TABLE IF EXISTS customers CASCADE;
+DROP TABLE IF EXISTS categories CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS order_products CASCADE;
 
 
--- KITCHENS TABLE
-CREATE TABLE kitchens (    
+
+-- ADRESSESS TABLE
+CREATE TABLE adressess (
   id        SERIAL PRIMARY KEY,
-  name      VARCHAR(50),
-  brand     VARCHAR(50),
-  color     VARCHAR(50),
-  size      VARCHAR(1),
-  price     INTEGER          
-);
-
--- POOL TABLES TABLE
-CREATE TABLE pool_tables (
-  id        SERIAL PRIMARY KEY,
-  name      VARCHAR(50),
-  brand     VARCHAR(50),
-  color     VARCHAR(50),
-  size      VARCHAR(1),
-  price     INTEGER 
-);
-
--- POOL CUES TABLE
-CREATE TABLE pool_cues (
-  id        SERIAL PRIMARY KEY,
-  name      VARCHAR(50),
-  brand     VARCHAR(50),
-  color     VARCHAR(50),
-  size      VARCHAR(1),
-  price     INTEGER 
-);
+  line_1    VARCHAR(100),
+  city      VARCHAR(50),
+  state     VARCHAR(2),
+  zipcode   VARCHAR(5)
+)
 
 -- CUSTOMERS TABLE
 CREATE TABLE customers (
-  id          SERIAL PRIMARY KEY,
-  first_name  VARCHAR(50) NOT NULL,
-  last_name   VARCHAR(50) NOT NULL,
-  email       VARCHAR(50) NOT NULL
+  id              SERIAL PRIMARY KEY,
+  first_name      VARCHAR(50) NOT NULL,
+  last_name       VARCHAR(50) NOT NULL,
+  email           VARCHAR(50) NOT NULL,
+  adressess_id    INTEGER
 );
 
--- ADRESSES TABLE
-CREATE TABLE adressess (
-  id            SERIAL PRIMARY KEY,
-  customer_id   INTEGER,
-  line_1        VARCHAR(50) NOT NULL,
-  line_2        VARCHAR(50) DEFAULT NULL,
-  city          VARCHAR(10),
-  state         VARCHAR(2),
-  zipcode       VARCHAR(5)
+-- CATEGORIES TABLE
+CREATE TABLE categories (
+  id        SERIAL PRIMARY KEY,
+  name      VARCHAR(100)
+)
+
+-- PRODUCTS TABLE
+CREATE TABLE products (    
+  id              SERIAL PRIMARY KEY,
+  name            VARCHAR(50),
+  price           INTEGER,
+  category_id     INTEGER
 );
 
 -- ORDERS TABLE
 CREATE TABLE orders (
   id                SERIAL PRIMARY KEY,
   date              DATE NOT NULL,
-  customer_id       INTEGER,
-  adressess_id      INTEGER,
-  kitchen_id        INTEGER DEFAULT NULL,
-  pool_tables_id    INTEGER DEFAULT NULL,
-  pool_cues_id      INTEGER DEFAULT NULL
+  customer_id       INTEGER
+);
+
+-- ORDER_PRODUCTS TABLE
+CREATE TABLE order_products (
+  id            SERIAL PRIMARY KEY,
+  order_id      INTEGER,
+  product_id    INTEGER,
+  adressess_id  INTEGER
 );
 
 
-ALTER TABLE adressess
-ADD CONSTRAINT fk_users_addresses_id
-FOREIGN KEY (customer_id) REFERENCES customers(id);
 
-ALTER TABLE orders
-ADD CONSTRAINT fk_users_orders_id
-FOREIGN KEY (customer_id) REFERENCES customers(id);
+-- ALTER TABLES FOR FOREIGN KEYS
+ALTER TABLE customers
+  ADD CONSTRAINT fk_customers_address_id 
+  FOREIGN KEY(address_id) 
+  REFERENCES addresses(id);
 
+ALTER TABLE products
+  ADD CONSTRAINT fk_products_category_id 
+  FOREIGN KEY(category_id) 
+  REFERENCES categories (id);
+    
 ALTER TABLE orders
-ADD CONSTRAINT fk_users_adressess_id
-FOREIGN KEY (adressess_id) REFERENCES adressess(id);
+  ADD CONSTRAINT fk_orders_customer_id 
+  FOREIGN KEY(customer_id) 
+  REFERENCES customers(id);
 
-ALTER TABLE orders
-ADD CONSTRAINT fk_users_kitchen_id
-FOREIGN KEY (kitchen_id) REFERENCES kitchens(id);
+ALTER TABLE order_products
+  ADD CONSTRAINT fk_order_id 
+  FOREIGN KEY(order_id) 
+  REFERENCES orders(id);
 
-ALTER TABLE orders
-ADD CONSTRAINT fk_users_tables_id
-FOREIGN KEY (pool_tables_id) REFERENCES pool_tables(id);
-
-ALTER TABLE orders
-ADD CONSTRAINT fk_users_cues_id
-FOREIGN KEY (pool_cues_id) REFERENCES pool_cues(id);
+ALTER TABLE order_products
+  ADD CONSTRAINT fk_product_id 
+  FOREIGN KEY(product_id) 
+  REFERENCES products(id);

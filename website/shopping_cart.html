@@ -14,7 +14,7 @@
   </style>
   <script src="scripts.js" async></script>
 </head>
-<body>
+<body onload='itemAdder()'>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,14 +44,9 @@
     <h2 class="checkout">CHECKOUT</h2>
     <div class="cart-row">
         <span class="checkout-heading">ITEM</span>
-        <span class="checkout-heading">PRICE</span>
-        <span class="checkout-heading">QUANTITY</span>
+        <br>
     </div>
-    <div class="items"></div>
-    <div class="cart-total">
-        <strong class="cart-total-title">Total</strong>
-        <span class="cart-total-price">$0</span>
-    </div>
+    <div id="items"></div>
     <button class="purchase" type="button">PURCHASE</button>
 </section>
 </body>
